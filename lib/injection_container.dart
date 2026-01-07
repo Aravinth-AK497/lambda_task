@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import 'core/network/api_client.dart';
+
 import 'features/users/data/datasources/user_remote_data_source.dart';
 import 'features/users/data/repositories/user_repository_impl.dart';
 import 'features/users/domain/repositories/user_repository.dart';
@@ -41,5 +41,14 @@ Future<void> init() async {
   );
 
   // Core
-  sl.registerLazySingleton(() => Dio());
+  sl.registerLazySingleton(() => Dio(
+    BaseOptions(
+      baseUrl: 'https://reqres.in/api',
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    ),
+  ));
 }

@@ -17,7 +17,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<List<UserModel>> getUsers(int page) async {
     try {
-      final response = await dio.get('https://reqres.in/api/users?page=$page');
+      final response = await dio.get('/users?page=$page');
       
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data['data'];
@@ -34,7 +34,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<UserModel> createUser(String name, String job) async {
     try {
       final response = await dio.post(
-        'https://reqres.in/api/users',
+        '/users',
         data: {'name': name, 'job': job},
       );
 
@@ -70,7 +70,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<UserModel> updateUser(int id, String name, String job) async {
     try {
       final response = await dio.put(
-        'https://reqres.in/api/users/$id',
+        '/users/$id',
         data: {'name': name, 'job': job},
       );
 
@@ -93,7 +93,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<void> deleteUser(int id) async {
     try {
-      final response = await dio.delete('https://reqres.in/api/users/$id');
+      final response = await dio.delete('/users/$id');
       
       if (response.statusCode != 204) {
          throw const ServerFailure('Failed to delete user');

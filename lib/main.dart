@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter User Management',
         theme: AppTheme.lightTheme,
+        debugShowCheckedModeBanner: false,
         home: const UserListScreen(),
       ),
     );
